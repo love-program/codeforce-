@@ -16,7 +16,7 @@ int main() {
         }
 
         vector<int> freq(n+1, 0);
-        // 修改部分：将基于范围的for循环改为传统索引循环
+
         for (int i = 0; i < n; i++) {
             if (a[i] <= n) {
                 freq[a[i]]++;

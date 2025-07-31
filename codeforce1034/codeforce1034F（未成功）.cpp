@@ -3,7 +3,6 @@
 #include <algorithm>
 using namespace std;
 
-// 计算最小质因数
 vector<int> smallest_prime_factor;
 void sieve(int max_n) {
     smallest_prime_factor.resize(max_n + 1);
@@ -28,25 +27,21 @@ int main() {
     int t;
     cin >> t;
     
-    // 预处理最小质因数数组（一次性处理所有可能的n）
     sieve(100000);
     
     while (t--) {
         int n;
         cin >> n;
-        vector<int> p(n + 1);  // 1-based排列
+        vector<int> p(n + 1);
         
-        // 初始化排列为p[i] = i
         for (int i = 1; i <= n; ++i) {
             p[i] = i;
         }
         
-        // 标记位置是否已处理
         vector<bool> used(n + 1, false);
         
-        // 按最小质因数分组处理
         for (int p_factor = 2; p_factor <= n; ++p_factor) {
-            if (smallest_prime_factor[p_factor] != p_factor) continue;  // 不是质数
+            if (smallest_prime_factor[p_factor] != p_factor) continue;
             
             vector<int> group;
             for (int x = p_factor; x <= n; x += p_factor) {
@@ -55,7 +50,6 @@ int main() {
                 }
             }
             
-            // 构造循环
             if (group.size() >= 2) {
                 for (size_t i = 0; i < group.size(); ++i) {
                     int next = (i + 1) % group.size();
@@ -64,16 +58,14 @@ int main() {
                 }
             }
         }
-        
-        // 处理剩余未被处理的数（如1和质数）
+
         vector<int> remaining;
         for (int i = 1; i <= n; ++i) {
             if (!used[i]) {
                 remaining.push_back(i);
             }
         }
-        
-        // 处理剩余数的循环
+
         if (!remaining.empty()) {
             for (size_t i = 0; i < remaining.size(); ++i) {
                 int next = (i + 1) % remaining.size();
@@ -81,7 +73,6 @@ int main() {
             }
         }
         
-        // 输出排列
         for (int i = 1; i <= n; ++i) {
             cout << p[i] << (i == n ? '\n' : ' ');
         }
