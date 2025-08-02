@@ -61,61 +61,76 @@ int main() {
 
     return 0;
 }
-// #include<bits/stdc++.h>
-// using namespace std;
-// string n;
-// vector<bool> vis(1e7, false);
-// bool is_number(string a)
-// {
-//     vector<bool>st(10, false);
-//     for (int i = 0; i < a.size(); i++)
-//     {
-//         if (!st[a[i]-'0'])
-//         {
-//             st[a[i]-'0'] = true;
+// #include <iostream>
+// #include <string>
+// #include <vector>
+// #include <numeric>
+
+// // 优化的DFS辅助函数
+// // s: 数字字符串
+// // visited: 记录位置是否被访问的数组
+// // current_pos: 当前所在的位置（索引）
+// // visited_count: 已经访问过的不同位置的数量
+// bool check_cycle_dfs(const std::string& s, std::vector<bool>& visited, int current_pos, int visited_count) {
+//     // 基本情况（递归终止条件）
+
+//     // 1. 如果当前位置已经访问过
+//     if (visited[current_pos]) {
+//         // 检查这是否是成功的循环：
+//         // 必须回到了起点(0)，并且所有位置都访问过了(visited_count == s.length())
+//         return current_pos == 0 && visited_count == s.length();
+//     }
+
+//     // 递归步骤
+
+//     // 标记当前位置为已访问
+//     visited[current_pos] = true;
+    
+//     // 计算下一个位置
+//     int jump_distance = s[current_pos] - '0';
+//     int next_pos = (current_pos + jump_distance) % s.length();
+    
+//     // 进入下一层递归，已访问位置数量加一
+//     return check_cycle_dfs(s, visited, next_pos, visited_count + 1);
+// }
+
+// // 主检查函数，负责设置并启动DFS
+// bool is_cyclic(int n) {
+//     std::string s = std::to_string(n);
+//     int len = s.length();
+
+//     // 优化点3：将检查前提化
+//     // 首先检查数字本身是否有效（无'0'，无重复数字）
+//     bool seen_digits[10] = {false};
+//     for (char c : s) {
+//         int digit = c - '0';
+//         if (digit == 0 || seen_digits[digit]) {
+//             return false; // 如果有'0'或重复数字，立即判定为无效
 //         }
-//         else
-//             return false;
+//         seen_digits[digit] = true;
 //     }
-//     return true;
+    
+//     // 优化点1：创建大小正确的visited数组
+//     std::vector<bool> visited(len, false);
+    
+//     // 优化点2和4：从起点(0)开始，初始访问数量为0，启动DFS
+//     return check_cycle_dfs(s, visited, 0, 0);
 // }
 
-// bool is_all_visited(string y)
-// {
-//     for (int i = 0; i < y.size(); i++)
-//     {
-//         if (!vis[i]) return false;
-//     }
-//     return true;
-// }
-// bool is_wanted(int x, string y)
-// {
-//     if (vis[x] && x != 0) return false;
-//     else if (y[x]-'0' == 0) return false;
-//     else if (x == 0 && is_all_visited(y)) return true;
-  
+// int main() {
+//     // 加快C++ I/O
+//     std::ios_base::sync_with_stdio(false);
+//     std::cin.tie(NULL);
 
-//     vis[x] = true;
-//     if (is_wanted((y[x] - '0'+x) % y.size(), y))
-//         return true;
-//     return false;
-// }
+//     int m;
+//     std::cin >> m;
 
-// int main()
-// {
-
-//     cin >> n;
-//     for (int i = stoi(n) + 1; i < 1e7; i++)
-//     {
-//         if(!is_number(to_string(i)))
-//             continue;
-//         vis.assign(1e7, false);
-//         vis[0] = true;
-//         string s = to_string(i);
-//         if (is_wanted((s[0] - '0') % s.size(), s))
-//         {
-//             cout << i << endl;
-//             return 0;
+//     for (int i = m + 1; ; ++i) {
+//         if (is_cyclic(i)) {
+//             std::cout << i << std::endl;
+//             break;
 //         }
 //     }
+
+//     return 0;
 // }
