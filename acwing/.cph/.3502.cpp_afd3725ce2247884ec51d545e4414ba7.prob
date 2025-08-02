@@ -1,0 +1,1 @@
+{"name":"Local: 3502","url":"d:\\PTA\\codeforce\\codeforce-\\acwing\\3502.cpp","tests":[{"id":1754117325729,"input":"3 3 2\n1 1 1\n1 1 1\n2 1 1","output":"5"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\PTA\\codeforce\\codeforce-\\acwing\\3502.cpp","group":"local","local":true}
