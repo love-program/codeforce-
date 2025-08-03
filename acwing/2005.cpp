@@ -86,6 +86,7 @@ int main()
     }
     visited.resize(n + 1, vector<bool>(n + 1, false));
     ans += '(';
+    visited[1][1] = true;
     dfs(1, 1);
     cout << max1 << endl;
 }
