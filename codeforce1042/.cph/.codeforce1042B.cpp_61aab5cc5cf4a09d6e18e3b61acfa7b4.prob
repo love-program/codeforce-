@@ -1,0 +1,1 @@
+{"name":"Local: codeforce1042B","url":"d:\\PTA\\codeforce\\codeforce-\\codeforce1042\\codeforce1042B.cpp","tests":[{"id":1754838046104,"input":"2\n2\n3\n","output":"-1 2\n-1 3 -1\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\PTA\\codeforce\\codeforce-\\codeforce1042\\codeforce1042B.cpp","group":"local","local":true}
